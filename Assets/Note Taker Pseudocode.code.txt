@@ -1,0 +1,86 @@
+  // Note Taker Application Pseudocode
+
+  // Server Setup
+  IMPORT required modules (express, fs, path, uuid)
+  CREATE Express application
+  SET port number
+
+  // Middleware Setup
+  CONFIGURE middleware for JSON parsing
+  CONFIGURE middleware for serving static files
+
+  // Route Handling
+  DEFINE HTML routes:
+    ROUTE for home page ("/"):
+      SEND index.html
+    ROUTE for notes page ("/notes"):
+      SEND notes.html
+
+  DEFINE API routes:
+    ROUTE for getting all notes (GET "/api/notes"):
+      READ notes from db.json
+      SEND notes as JSON response
+
+    ROUTE for creating a new note (POST "/api/notes"):
+      RECEIVE new note data in request body
+      GENERATE unique id for new note
+      READ existing notes from db.json
+      ADD new note to existing notes
+      WRITE updated notes back to db.json
+      SEND new note as JSON response
+
+    ROUTE for deleting a note (DELETE "/api/notes/:id"):
+      RECEIVE note id from request parameters
+      READ notes from db.json
+      REMOVE note with matching id
+      WRITE updated notes back to db.json
+      SEND success response
+
+  // Helper Functions
+  FUNCTION readNotesFromFile():
+    READ content of db.json
+    PARSE content as JSON
+    RETURN parsed notes
+
+  FUNCTION writeNotesToFile(notes):
+    CONVERT notes to JSON string
+    WRITE JSON string to db.json
+
+  // Start Server
+  START listening on configured port
+  LOG server start message
+
+  // Note Operations
+  FUNCTION getAllNotes():
+    RETURN readNotesFromFile()
+
+  FUNCTION createNote(title, text):
+    CREATE new note object with title, text, and generated id
+    ADD new note to existing notes
+    CALL writeNotesToFile with updated notes
+    RETURN new note
+
+  FUNCTION deleteNote(id):
+    GET all notes
+    FILTER out note with matching id
+    CALL writeNotesToFile with filtered notes
+
+  // Client-Side Operations (pseudocode for front-end logic)
+  FUNCTION displayNotes():
+    FETCH notes from API
+    FOR EACH note in notes:
+      CREATE note element
+      APPEND note element to note list
+
+  FUNCTION saveNote():
+    GET note title and text from input fields
+    SEND POST request to API with note data
+    ON success:
+      CLEAR input fields
+      REFRESH note list
+
+  FUNCTION deleteNote(id):
+    SEND DELETE request to API with note id
+    ON success:
+      REMOVE note from display
+      REFRESH note list
