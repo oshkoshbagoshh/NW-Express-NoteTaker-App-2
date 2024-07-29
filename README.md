@@ -37,4 +37,4 @@ This project is licensed under the MIT License.
 
 AJ Javadi - amirjavadi25@gmail.com
 
-Project Link: [https://github.com/your-username/note-taker](https://github.com/your-username/note-taker)
+Project Link: [stackblitz](https://stackblitz.com/~/github.com/oshkoshbagoshh/NW-Express-NoteTaker-App-2)
